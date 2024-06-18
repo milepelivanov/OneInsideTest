@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const apiUrl = 'https://dog.ceo/api/breeds/image/random';
+            const button = document.getElementById('Button');
+
+            function loadImage() {
+                const img = document.getElementById('Photo');
+
+                fetch(apiUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Network response not good");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+
+                        console.log(data.message);
+                        img.src = data.message
+
+
+                    })
+                    .catch(error => {
+                        console.error("Error fetching data", error);
+
+                    });
+            }
+
+            loadImage();
+            button.addEventListener('click', loadImage)
+        });
+    </script>
+</head>
+<body>
+<img id="Photo" src="">
+<button id="Button">Click</button>
+</body>
+</html>
